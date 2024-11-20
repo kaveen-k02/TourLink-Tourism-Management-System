@@ -1,0 +1,30 @@
+<div class="wrapper">
+
+    <div class="section section-team ">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <h2 class="title">Feedback</h2>
+            </div>
+            <div class="team">
+                <div class="row text-center">
+                    <div class="col-md-4" *ngFor = "let rating of ratings">
+                        <div class="team-player">
+                            <img src="assets/img/ryan.jpg" alt="Thumbnail Image" class="rounded-circle img-fluid img-raised">
+                            <h4 class="title mb-0 text-primary">{{ rating.userName }}</h4>
+                            <div class="star-rating">
+                                <span class="star" *ngFor="let star of [1, 2, 3, 4, 5]" [ngClass]="{'highlighted': star <= rating.rating}">&#9733;</span>
+                            </div>
+                           
+                            <p class="description">{{ rating.comment }}</p>
+                            <button (click)="openPopup(rating.ratingId, 'user')" class="btn btn-warning mr-2">Update</button>
+                            <button style="background-color: red;" (click) = "openDialog(rating.ratingId)" class="btn">delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <update-feedback-form-cmp *ngIf="showPopup" [id]="idToSend" [ty]="rateType" (closeModal)="showPopup = false"></update-feedback-form-cmp>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
